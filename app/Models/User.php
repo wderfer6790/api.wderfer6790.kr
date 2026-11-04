@@ -2,16 +2,19 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
+use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, MustVerifyEmail;
+
+    protected $table = 'user';
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +25,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'email_verified_at',
+        'remember_token',
     ];
 
     /**
@@ -46,4 +51,26 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function articles(): HasMany
+    {
+        return $this->hasMany(Article::class, 'user_id');
+    }
+
+    public function replies(): HasMany
+    {
+        return $this->hasMany(Reply::class, 'user_id');
+    }
+
+    public function files(): MorphToMany
+    {
+        return $this->morphToMany(
+            File::class,
+            'fileable',
+            'fileable',
+            'relation_id',
+            'relation_with');
+    }
+
+
 }
