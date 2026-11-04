@@ -16,13 +16,15 @@ return new class extends Migration
             $table->foreignId('user_id')
                 ->constrained('user');
             $table->string('title', '256');
-            $table->fullText('content');
+            $table->text('content');
             $table->integer('views', false, true)
                 ->default(0);
             $table->integer('likes', false, true)
                 ->default(0);
             $table->timestamps();
             $table->softDeletes();
+
+            $table->fullText('content');
         });
     }
 
