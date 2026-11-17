@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('file', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('uploaded_by')
+            $table->foreignId('user_id')
                 ->nullable()
                 ->constrained('user');
             $table->string('disk', 30)
