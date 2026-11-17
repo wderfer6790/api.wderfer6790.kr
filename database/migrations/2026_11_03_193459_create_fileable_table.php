@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('fileable', function (Blueprint $table) {
             $table->foreignId('file_id')
                 ->constrained('file');
-            $table->enum('relation_with', ['user', 'article', 'reply']);
-            $table->integer('relation_id');
+            $table->enum('fileable_type', ['user', 'article', 'reply']);
+            $table->integer('fileable_id');
             $table->string('role', 32)
                 ->default('attachment');
             $table->timestamps();
 
-            $table->unique(['file_id', 'relation_with', 'relation_id']);
-            $table->index(['relation_with', 'relation_id']);
+            $table->unique(['file_id', 'fileable_type', 'fileable_id']);
+            $table->index(['fileable_type', 'fileable_id']);
         });
     }
 

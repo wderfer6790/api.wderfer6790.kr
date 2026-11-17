@@ -27,9 +27,7 @@ class File extends Model
         return $this->morphedByMany(
             User::class,
             'fileable',
-            'fileable',
-            'relation_id',
-            'relation_with'
+            'fileable'
         );
     }
 
@@ -38,9 +36,7 @@ class File extends Model
         return $this->morphedByMany(
             Article::class,
             'fileable',
-            'fileable',
-            'relation_id',
-            'relation_with'
+            'fileable'
         );
     }
 
@@ -49,9 +45,7 @@ class File extends Model
         return $this->morphedByMany(
             Reply::class,
             'fileable',
-            'fileable',
-            'relation_id',
-            'relation_with'
+            'fileable'
         );
     }
 }

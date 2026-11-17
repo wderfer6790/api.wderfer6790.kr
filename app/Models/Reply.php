@@ -48,9 +48,7 @@ class Reply extends Model
         return $this->morphToMany(
             File::class,
             'fileable',
-            'fileable',
-            'relation_id',
-            'relation_with'
+            'fileable'
         );
     }
 }
